@@ -1,4 +1,4 @@
-const arr = [1, 2, 3, 4, 5];
+const arr = [1, 2, , , 4];
 
 Array.prototype.reduce2 = function (callback, initialValue) {
   const length = this.length;
@@ -22,7 +22,9 @@ Array.prototype.reduce2 = function (callback, initialValue) {
   }
 
   for (let i = startIndex; i < this.length; i++) {
-    accumulator = callback(accumulator, this[i], i, this);
+    if (i in this) {
+      accumulator = callback(accumulator, this[i], i, this);
+    }
   }
 
   return accumulator;
@@ -32,4 +34,9 @@ function multiplication(total, sum) {
   return total + sum;
 }
 
-const result = arr.reduce2(multiplication, 0);
+const result = arr.reduce2(multiplication);
+
+const result2 = arr.reduce((total, sum) => total + sum, 0);
+
+console.log(result);
+console.log(result2);
