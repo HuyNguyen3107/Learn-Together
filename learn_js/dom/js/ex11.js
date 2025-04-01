@@ -25,51 +25,6 @@ for (let i = 0; i < items.length; i++) {
 }
 dotList.innerHTML = result;
 
-// const handleChangeDot = (index) => {
-//   Array.from(dotList.children).forEach(function (dot, indexDot) {
-//     if (index === indexDot) {
-//       dot.classList.add("active");
-//     }
-//     Array.from(dotList.children).forEach(function (dotItem, indexItem) {
-//       if (index !== indexItem) {
-//         dotItem.classList.remove("active");
-//       }
-//     });
-//   });
-// };
-
-// let id;
-// let indexAutoPlay = 0;
-
-// let isSecondLoop = false;
-
-// const handleAutoPlay = () => {
-//   nextBtn.click();
-//   if (!isSecondLoop) {
-//     if (indexAutoPlay === items.length - 2) {
-//       indexAutoPlay++;
-//       handleChangeDot(indexAutoPlay);
-//       indexAutoPlay = 0;
-//       isSecondLoop = true;
-//     } else {
-//       indexAutoPlay++;
-//       handleChangeDot(indexAutoPlay);
-//     }
-//   } else {
-//     if (indexAutoPlay === items.length - 1) {
-//       handleChangeDot(indexAutoPlay);
-//       indexAutoPlay = 0;
-//     } else {
-//       handleChangeDot(indexAutoPlay);
-//       indexAutoPlay++;
-//     }
-//   }
-// };
-
-// id = setInterval(handleAutoPlay, 3000);
-
-let indexAutoPlay = 0;
-
 const handleChangeDot = (control) => {
   let flag = true;
   Array.from(dotList.children).forEach(function (dot, index) {
@@ -84,6 +39,16 @@ const handleChangeDot = (control) => {
     }
   });
 };
+
+const handleAutoplay = () => {
+  nextBtn.click();
+};
+
+let idAutoPlay;
+
+idAutoPlay = setInterval(() => {
+  handleAutoplay();
+}, 5000);
 
 nextBtn.addEventListener("click", (e) => {
   if (Math.abs(position) < totalWidth - itemWidth) {
@@ -105,18 +70,6 @@ nextBtn.addEventListener("click", (e) => {
   }
 });
 
-// nextBtn.addEventListener("mousedown", (e) => {
-//   indexAutoPlay++;
-//   if (indexAutoPlay > items.length - 1) {
-//     indexAutoPlay = 0;
-//   }
-//   clearInterval(id);
-// });
-
-// nextBtn.addEventListener("mouseup", (e) => {
-//   id = setInterval(handleAutoPlay, 3000);
-// });
-
 prevBtn.addEventListener("click", (e) => {
   if (Math.abs(position) > 0) {
     position += itemWidth;
@@ -124,18 +77,6 @@ prevBtn.addEventListener("click", (e) => {
     handleChangeDot("prev");
   }
 });
-
-// prevBtn.addEventListener("mousedown", (e) => {
-//   indexAutoPlay--;
-//   if (indexAutoPlay < 0) {
-//     indexAutoPlay = items.length - 1;
-//   }
-//   clearInterval(id);
-// });
-
-// prevBtn.addEventListener("mouseup", (e) => {
-//   id = setInterval(handleAutoPlay, 3000);
-// });
 
 const dotItems = document.querySelectorAll(".dot-item");
 
@@ -164,19 +105,34 @@ dotItems.forEach(function (item, index) {
   });
 });
 
-// dotItems.forEach(function (item, index) {
-//   item.addEventListener("mousedown", () => {
-//     if (!isSecondLoop) {
-//       if (index === items.length - 1) {
-//         indexAutoPlay = 0;
-//       }
-//     } else {
-//       indexAutoPlay = index;
-//     }
-//     clearInterval(id);
-//   });
+nextBtn.addEventListener("mousedown", () => {
+  clearInterval(idAutoPlay);
+});
 
-//   item.addEventListener("mouseup", () => {
-//     id = setInterval(handleAutoPlay, 3000);
-//   });
-// });
+nextBtn.addEventListener("mouseup", () => {
+  idAutoPlay = setInterval(() => {
+    handleAutoplay();
+  }, 5000);
+});
+
+prevBtn.addEventListener("mousedown", () => {
+  clearInterval(idAutoPlay);
+});
+
+prevBtn.addEventListener("mouseup", () => {
+  idAutoPlay = setInterval(() => {
+    handleAutoplay();
+  }, 5000);
+});
+
+dotItems.forEach(function (dot, index) {
+  dot.addEventListener("mousedown", () => {
+    clearInterval(idAutoPlay);
+  });
+
+  dot.addEventListener("mouseup", () => {
+    idAutoPlay = setInterval(() => {
+      handleAutoplay();
+    }, 5000);
+  });
+});
