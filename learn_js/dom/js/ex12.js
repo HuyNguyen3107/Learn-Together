@@ -78,12 +78,12 @@ const dataList = [
 
 // container.append(ul);
 
-const ul = document.querySelector("ul");
+// const ul = document.querySelector("ul");
 
-const li = document.createElement("li");
-li.innerText = 4;
+// const li = document.createElement("li");
+// li.innerText = 4;
 
-console.log(ul.children[2]);
+// console.log(ul.children[2]);
 
 // ul.append(li);
 // ul.prepend(li);
@@ -100,4 +100,49 @@ console.log(ul.children[2]);
 
 // p.innerText = "description";
 
-// container.insertBefore(p, h1.nextElementSibling);
+// // container.insertBefore(p, h1.nextElementSibling);
+
+// // container.replaceChild(p, h1);
+
+// container.removeChild(h1);
+
+// container.remove();
+
+const span = document.createElement("span");
+
+const textNode = document.createTextNode(0);
+
+// span.innerText = 0;
+
+span.append(textNode);
+
+const increaseBtn = document.createElement("button");
+const decreaseBtn = document.createElement("button");
+
+increaseBtn.innerText = "+";
+decreaseBtn.innerText = "-";
+
+container.append(increaseBtn, " ");
+container.append(span, " ");
+container.append(decreaseBtn);
+
+increaseBtn.addEventListener("click", (e) => {
+  // const el = e.target.nextElementSibling;
+  // el.innerText = +el.innerText + 1;
+  textNode.data++;
+});
+
+decreaseBtn.addEventListener("click", (e) => {
+  // const el = e.target.previousElementSibling;
+  // if (+el.innerText > 0) {
+  //   el.innerText = +el.innerText - 1;
+  // }
+  if (+textNode.data > 0) {
+    textNode.data--;
+  }
+  // const h1 = document.createElement("h1");
+  // h1.innerText = "title";
+  // container.replaceChild(h1, span);
+
+  // container.innerHTML = `<h1>OK</h1>`;
+});
