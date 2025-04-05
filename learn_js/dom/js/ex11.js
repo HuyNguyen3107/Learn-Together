@@ -136,3 +136,40 @@ dotItems.forEach(function (dot, index) {
     }, 5000);
   });
 });
+
+let initialOffsetX;
+let isDrag = false;
+
+const rateChange = (10 * itemWidth) / 100;
+
+carouselInner.addEventListener("mousedown", (e) => {
+  e.preventDefault();
+  initialOffsetX = e.offsetX;
+  isDrag = true;
+  clearInterval(idAutoPlay);
+});
+
+carouselInner.addEventListener("mousemove", (e) => {
+  e.preventDefault();
+  if (isDrag) {
+    const currentOffsetX = e.offsetX;
+    const moveWidth = currentOffsetX - initialOffsetX;
+    if (moveWidth < 0) {
+      if (Math.abs(moveWidth) > rateChange) {
+        carouselInner.style.transition = null;
+        // nextBtn.click();
+      } else {
+        carouselInner.style.transition = "none";
+        // carouselInner.style.translate = `${position + moveWidth}px`;
+        carouselInner.style.transform = `translateX(${position + moveWidth}px)`;
+      }
+    }
+  }
+});
+
+carouselInner.addEventListener("mouseup", (e) => {
+  isDrag = false;
+  idAutoPlay = setInterval(() => {
+    handleAutoplay();
+  }, 5000);
+});
