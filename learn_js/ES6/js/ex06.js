@@ -38,16 +38,16 @@ const getUsers = () => {
 //     console.log("finally");
 //   });
 
-// getUsers()
-//   .then((users) => {
-//     console.log(users);
-//   })
-//   .catch((error) => {
-//     console.log(error);
-//   })
-//   .finally(() => {
-//     console.log("ok");
-//   });
+getUsers()
+  .then((users) => {
+    console.log(users);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  .finally(() => {
+    console.log("ok");
+  });
 
 // download1()
 //   .then((download1) => {
