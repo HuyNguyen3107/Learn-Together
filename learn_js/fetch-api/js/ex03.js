@@ -18,8 +18,42 @@ const showTasks = async () => {
   if (response.ok) {
     data.forEach((task) => {
       const li = document.createElement("li");
-      li.innerText = task.name;
-      li.setAttribute("data-id", task.id);
+      const span = document.createElement("span");
+      const deleteBtn = document.createElement("button");
+      const updateBtn = document.createElement("button");
+      deleteBtn.classList.add("delete-btn");
+      updateBtn.classList.add("update-btn");
+      span.innerText = task.name;
+      span.setAttribute("data-id", task.id);
+      deleteBtn.innerText = "Delete";
+      updateBtn.innerText = "Update";
+      updateBtn.addEventListener("click", async function () {
+        if (this.innerText === "Update") {
+          const input = document.createElement("input");
+          input.value = this.previousElementSibling.innerText;
+          this.previousElementSibling.remove();
+          this.parentElement.prepend(input);
+          this.innerText = "Completed";
+        } else if (this.innerText === "Completed") {
+          const value = this.previousElementSibling.value;
+          const { response: res } = await client.patch(`tasks/${task.id}`, {
+            name: value,
+          });
+
+          if (res.ok) {
+            const span = document.createElement("span");
+            span.innerHTML = value;
+            span.setAttribute("data-id", task.id);
+            this.previousElementSibling.remove();
+            this.parentElement.prepend(span);
+            this.innerText = "Update";
+          } else {
+            alert("Update fail");
+          }
+        }
+      });
+
+      li.append(span, updateBtn, deleteBtn);
       ul.append(li);
     });
   }
@@ -43,20 +77,60 @@ const createTask = async (body) => {
 
 button.addEventListener("click", async () => {
   const name = input.value;
-  const id = +ul.children[ul.children.length - 1].getAttribute("data-id") + 1;
+  const id =
+    +ul.children[ul.children.length - 1].children[0].getAttribute("data-id") +
+    1;
   const body = {
     id,
     name,
   };
+
   const { response } = await createTask(body);
   if (response.ok) {
     alert("Created success");
+
     const li = document.createElement("li");
-    li.innerText = name;
-    li.setAttribute("data-id", id);
+    const span = document.createElement("span");
+    const deleteBtn = document.createElement("button");
+    const updateBtn = document.createElement("button");
+    deleteBtn.classList.add("delete-btn");
+    updateBtn.classList.add("update-btn");
+    span.innerText = name;
+    span.setAttribute("data-id", id);
+    deleteBtn.innerText = "Delete";
+    updateBtn.innerText = "Update";
+    updateBtn.addEventListener("click", async function () {
+      if (this.innerText === "Update") {
+        const input = document.createElement("input");
+        input.value = this.previousElementSibling.innerText;
+        this.previousElementSibling.remove();
+        this.parentElement.prepend(input);
+        this.innerText = "Completed";
+      } else if (this.innerText === "Completed") {
+        const value = this.previousElementSibling.value;
+        const { response: res } = await client.patch(`tasks/${id}`, {
+          name: value,
+        });
+
+        if (res.ok) {
+          const span = document.createElement("span");
+          span.innerHTML = value;
+          span.setAttribute("data-id", id);
+          this.previousElementSibling.remove();
+          this.parentElement.prepend(span);
+          this.innerText = "Update";
+        } else {
+          alert("Update fail");
+        }
+      }
+    });
+
+    li.append(span, updateBtn, deleteBtn);
     ul.append(li);
     input.value = "";
   } else {
     alert("Created fail");
   }
 });
+
+// const
