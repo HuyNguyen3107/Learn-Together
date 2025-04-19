@@ -134,3 +134,60 @@ button.addEventListener("click", async () => {
 });
 
 // const
+
+const searchField = document.querySelector(".search-field");
+
+const renderTasks = (data) => {
+  ul.innerHTML = "";
+  data.forEach((task) => {
+    const li = document.createElement("li");
+    const span = document.createElement("span");
+    const deleteBtn = document.createElement("button");
+    const updateBtn = document.createElement("button");
+    deleteBtn.classList.add("delete-btn");
+    updateBtn.classList.add("update-btn");
+    span.innerText = task.name;
+    span.setAttribute("data-id", task.id);
+    deleteBtn.innerText = "Delete";
+    updateBtn.innerText = "Update";
+    // updateBtn.addEventListener("click", async function () {
+    //   if (this.innerText === "Update") {
+    //     const input = document.createElement("input");
+    //     input.value = this.previousElementSibling.innerText;
+    //     this.previousElementSibling.remove();
+    //     this.parentElement.prepend(input);
+    //     this.innerText = "Completed";
+    //   } else if (this.innerText === "Completed") {
+    //     const value = this.previousElementSibling.value;
+    //     const { response: res } = await client.patch(`tasks/${task.id}`, {
+    //       name: value,
+    //     });
+
+    //     if (res.ok) {
+    //       const span = document.createElement("span");
+    //       span.innerHTML = value;
+    //       span.setAttribute("data-id", task.id);
+    //       this.previousElementSibling.remove();
+    //       this.parentElement.prepend(span);
+    //       this.innerText = "Update";
+    //     } else {
+    //       alert("Update fail");
+    //     }
+    //   }
+    // });
+
+    li.append(span, updateBtn, deleteBtn);
+    ul.append(li);
+  });
+};
+searchField.addEventListener("input", async (e) => {
+  const queryString = new URLSearchParams({
+    name: e.target.value,
+  }).toString();
+  const { response, data } = await client.get(`tasks?${queryString}`);
+  if (response.ok) {
+    console.log(data);
+
+    renderTasks(data);
+  }
+});

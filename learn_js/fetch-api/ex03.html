@@ -18,6 +18,9 @@
         .add-field {
             display: flex;
             justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 20px;
         }
 
         input {
@@ -61,15 +64,21 @@
 </head>
 
 <body>
-    <!-- <div class="container">
+    <div class="container">
         <div class="add-field">
-            <input type="text">
-            <button>Add</button>
+            <div>
+                <input type="text">
+                <button>Add</button>
+            </div>
+            <div>
+                <input class="search-field" type="text">
+                <button>Search</button>
+            </div>
         </div>
         <ul>
 
         </ul>
-    </div> -->
+    </div>
     <script type="module" src="./js/ex03.js"></script>
 </body>
 
