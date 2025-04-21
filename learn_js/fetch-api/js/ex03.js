@@ -180,14 +180,25 @@ const renderTasks = (data) => {
     ul.append(li);
   });
 };
+
+let timerId = null;
+
+const debounce = (value) => {
+  if (timerId) {
+    clearTimeout(timerId);
+  }
+
+  timerId = setTimeout(async () => {
+    const { response, data } = await client.get(`tasks?${value}`);
+    if (response.ok) {
+      renderTasks(data);
+    }
+  }, 1000);
+};
+
 searchField.addEventListener("input", async (e) => {
   const queryString = new URLSearchParams({
     name: e.target.value,
   }).toString();
-  const { response, data } = await client.get(`tasks?${queryString}`);
-  if (response.ok) {
-    console.log(data);
-
-    renderTasks(data);
-  }
+  debounce(queryString);
 });
