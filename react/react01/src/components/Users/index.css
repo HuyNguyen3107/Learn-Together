@@ -1,0 +1,11 @@
+.users {
+  width: 60%;
+  background-color: palevioletred;
+  color: #fff;
+  font-size: 28px;
+  font-weight: 800;
+  margin: 40px auto;
+  padding: 40px;
+  height: 700px;
+  text-align: center;
+}
