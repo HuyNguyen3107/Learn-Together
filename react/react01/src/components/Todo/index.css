@@ -1,66 +1,74 @@
 .todo {
-    width: 70%;
-    margin: 40px auto;
-    background-color: darkcyan;
-    border-radius: 40px;
-    box-shadow:  0 0 2px #ccc;
-    height: 90vh;
+  width: 70%;
+  margin: 40px auto;
+  background-color: darkcyan;
+  border-radius: 40px;
+  box-shadow: 0 0 2px #ccc;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  color: #fff;
+
+  h1 {
+    font-size: 50px;
+  }
+
+  form {
+    display: flex;
+    column-gap: 20px;
+
+    input {
+      border: none;
+      outline: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 20px;
+    }
+
+    button {
+      padding: 5px 20px;
+      border: none;
+      background-color: chocolate;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      border-radius: 99px;
+      cursor: pointer;
+    }
+  }
+  ul {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    justify-content: center;
     align-items: center;
-    color: #fff;
-
-    h1 {
-        font-size: 50px;
+    width: 100%;
+    list-style: none;
+    row-gap: 20px;
+    li {
+      display: flex;
+      column-gap: 20px;
+      font-size: 20px;
+      align-items: center;
+    }
+    button {
+      padding: 5px 20px;
+      border: none;
+      background-color: chocolate;
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      border-radius: 99px;
+      cursor: pointer;
     }
 
-    form {
-        display: flex;
-        column-gap: 20px;
-
-        input {
-            border: none;
-            outline: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            font-size: 20px;
-        }
-
-        button {
-            padding: 5px 20px;
-            border: none;
-            background-color: chocolate;
-            font-size: 18px;
-            font-weight: 600;
-            color: #fff;
-            border-radius: 99px;
-            cursor: pointer;
-        }   
+    input {
+      border: none;
+      outline: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      font-size: 20px;
     }
-    ul {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        list-style: none;
-        row-gap: 20px;
-        li {
-            display: flex;
-            column-gap: 20px;
-            font-size: 20px;
-            align-items: center;
-        }
-        button {
-            padding: 5px 20px;
-            border: none;
-            background-color: chocolate;
-            font-size: 18px;
-            font-weight: 600;
-            color: #fff;
-            border-radius: 99px;
-            cursor: pointer;
-        } 
-    }
+  }
 }
