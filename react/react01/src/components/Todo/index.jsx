@@ -25,7 +25,7 @@ function Todo() {
   return (
     <div className="todo">
       <h1>Todo</h1>
-      <TodoForm setTodoList={setTodoList} todoList={todoList} />
+      <TodoForm todoList={todoList} setTodoList={setTodoList} />
       <TodoList todoList={todoList} setTodoList={setTodoList} />
     </div>
   );

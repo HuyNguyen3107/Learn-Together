@@ -1,46 +1,53 @@
 import React, { useState } from "react";
 
 function TodoList({ todoList, setTodoList }) {
-  const [updateId, setUpdateId] = useState(null);
+  const [id, setId] = useState(null);
   const [value, setValue] = useState("");
-  const handleUpdate = (e) => {
-    if (updateId !== null) {
-      const newTodoList = todoList.map((task) => {
-        if (+task.id === +updateId) {
+  const handleClick = (e) => {
+    if (id === null) {
+      const idChange = +e.target.getAttribute("data-id");
+      setId(idChange);
+      const name = todoList.find((todo) => todo.id === idChange).name;
+      setValue(name);
+    } else {
+      const todoListUpdate = todoList.map((todo) => {
+        if (todo.id === id) {
           return {
-            id: task.id,
+            id: todo.id,
             name: value,
           };
         }
-        return task;
+        return todo;
       });
-      setTodoList(newTodoList);
-      setUpdateId(null);
-    } else {
-      setUpdateId(+e.target.getAttribute("data-id"));
-      const value = todoList.find(
-        (task) => task.id === +e.target.getAttribute("data-id")
-      ).name;
-      setValue(value);
+      setTodoList(todoListUpdate);
+      setId(null);
+      setValue("");
     }
   };
   const handleChange = (e) => {
     setValue(e.target.value);
   };
+  const handleDelete = (e) => {
+    const idDelete = +e.target.getAttribute("data-id");
+    const newTodoList = todoList.filter((todo) => todo.id !== idDelete);
+    setTodoList(newTodoList);
+  };
   return (
     <ul>
-      {todoList.map((task, index) => {
+      {todoList.map((todo, index) => {
         return (
           <li key={index}>
-            {+task.id === +updateId ? (
+            {id === todo.id ? (
               <input type="text" value={value} onChange={handleChange} />
             ) : (
-              <span>{task.name}</span>
+              <span>{todo.name}</span>
             )}
-            <button data-id={task.id} onClick={handleUpdate}>
-              {+task.id === +updateId ? "Completed" : "Update"}
+            <button onClick={handleClick} data-id={todo.id}>
+              {id === todo.id ? "Complete" : "Update"}
             </button>
-            <button data-id={task.id}>Delete</button>
+            <button data-id={todo.id} onClick={handleDelete}>
+              Delete
+            </button>
           </li>
         );
       })}

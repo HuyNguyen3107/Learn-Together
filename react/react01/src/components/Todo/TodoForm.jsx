@@ -4,14 +4,12 @@ function TodoForm({ todoList, setTodoList }) {
   const [value, setValue] = useState("");
   const handleSubmit = (e) => {
     e.preventDefault();
-    const lastId = todoList[todoList.length - 1].id;
-    const newTodoList = [
-      ...todoList,
-      {
-        id: +lastId + 1,
-        name: value,
-      },
-    ];
+    const newId = todoList[todoList.length - 1].id + 1;
+    const task = {
+      id: newId,
+      name: value,
+    };
+    const newTodoList = [...todoList, task];
     setTodoList(newTodoList);
     setValue("");
   };
