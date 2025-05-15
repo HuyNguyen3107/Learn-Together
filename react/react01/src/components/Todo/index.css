@@ -5,6 +5,8 @@
   border-radius: 40px;
   box-shadow: 0 0 2px #ccc;
   height: 90vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column;
   row-gap: 10px;

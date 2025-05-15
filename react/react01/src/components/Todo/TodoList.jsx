@@ -19,6 +19,7 @@ function TodoList({ todoList, setTodoList }) {
         }
         return todo;
       });
+      // localStorage.setItem("todoList", JSON.stringify(todoListUpdate));
       setTodoList(todoListUpdate);
       setId(null);
       setValue("");
@@ -40,7 +41,7 @@ function TodoList({ todoList, setTodoList }) {
             {id === todo.id ? (
               <input type="text" value={value} onChange={handleChange} />
             ) : (
-              <span>{todo.name}</span>
+              <span>{todo.todo}</span>
             )}
             <button onClick={handleClick} data-id={todo.id}>
               {id === todo.id ? "Complete" : "Update"}
