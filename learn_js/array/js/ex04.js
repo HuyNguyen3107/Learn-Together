@@ -17,14 +17,14 @@
 
 // => Giá trị trả về của reduce sẽ là lần return cuối cùng của callback
 
-// const arr = [1, 2, 3, 4, 5];
+const arr = [1, 2, 3, 4, 5];
 
-// const result = arr.reduce((prev, curr) => {
-//   console.log(prev);
-//   return prev + curr;
-// }, 0);
+const result = arr.reduce((prev, curr) => {
+  console.log(prev);
+  return prev + curr;
+}, 0);
 
-// console.log(result);
+console.log(result);
 
 // Tìm max sử dụng reduce
 
