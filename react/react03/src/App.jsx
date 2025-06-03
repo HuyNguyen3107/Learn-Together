@@ -2,6 +2,12 @@ import React, { useEffect, useState } from "react";
 import { useRef } from "react";
 import Content from "./components/Content";
 import ImageBox from "./components/ImageBox";
+import withAuth from "./HOC/withAuth";
+import Profile from "./components/Profile";
+import withLoading from "./HOC/withLoading";
+
+const ProfileWithAuth = withAuth(Profile);
+const ContentWithLoading = withLoading(Content);
 
 function App() {
   // const inputRef = useRef();
@@ -26,9 +32,10 @@ function App() {
   //   inputRef.current.focus();
   //   contentRef.current.innerText = "ok";
   // }, []);
+
   return (
     <div>
-      <ImageBox />
+      {/* <ImageBox /> */}
       {/* <div
         style={{
           display: "flex",
@@ -44,6 +51,31 @@ function App() {
         <button>Submit</button>
       </form>
       <Content ref={contentRef} /> */}
+      {/* <ProfileWithAuth
+        info={{
+          name: "John Doe",
+          age: 30,
+          email: "",
+        }}
+      /> */}
+      {/* <Content /> */}
+      <ContentWithLoading
+        info={{
+          title: "Lorem ipsum dolor sit amet",
+          description:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure saepe ullam debitis sit consequatur asperiores, commodi laboriosam veritatis, sunt incidunt dolore vero aliquam, nesciunt molestiae eligendi aperiam quam molestias nemo.",
+        }}
+      />
+      {/* <ImageBox /> */}
+      {/* <ProfileWithAuth
+        info={{
+          name: "John Doe",
+          age: 30,
+          email: "",
+        }}
+      {/* <Profile /> */}
+      {/* <Content /> */}
+      {/* <ImageBox /> */}
     </div>
   );
 }
