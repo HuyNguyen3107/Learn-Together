@@ -28,9 +28,11 @@ const History = memo(function History({ history, total, onClearHistory }) {
             <td colSpan="2">Tổng cộng</td>
             <td>{total}</td>
           </tr>
-        </tfoot>
+        </tfoot>{" "}
       </table>
-      <button onClick={onClearHistory}>Xóa lịch sử</button>
+      <button className="danger" onClick={onClearHistory}>
+        🗑️ Xóa lịch sử
+      </button>
     </div>
   );
 });

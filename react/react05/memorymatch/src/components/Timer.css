@@ -1,0 +1,44 @@
+.timer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  min-width: 120px;
+  justify-content: center;
+}
+
+.timer.playing {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  box-shadow: 0 4px 15px rgba(245, 87, 108, 0.3);
+}
+
+.timer-icon {
+  font-size: 1.2rem;
+}
+
+.timer-value {
+  font-family: "Courier New", monospace;
+  font-size: 1.1rem;
+}
+
+@media (max-width: 480px) {
+  .timer {
+    padding: 10px 16px;
+    font-size: 1rem;
+    min-width: 100px;
+  }
+
+  .timer-icon {
+    font-size: 1rem;
+  }
+
+  .timer-value {
+    font-size: 1rem;
+  }
+}
