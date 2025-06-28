@@ -4,37 +4,34 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Product from "./pages/Product";
 import NotFound from "./pages/NotFound";
+import ProductDetail from "./pages/ProductDetail";
+import Layout from "./layouts/Layout";
+import Login from "./pages/Login";
+import SearchResults from "./pages/SearchResults";
+import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <header>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/about">About</Link>
-              </li>
-              <li>
-                <Link to="/product">Product</Link>
-              </li>
-              <li>
-                <Link to="/non-existent">Non-existent</Link>
-              </li>
-            </ul>
-          </nav>
-        </header>
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/product" element={<Product />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </main>
-      </div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/product" element={<Product />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/search" element={<SearchResults />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </BrowserRouter>
   );
 }
